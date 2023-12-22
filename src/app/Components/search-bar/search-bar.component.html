@@ -1,1 +1,22 @@
-<p>search-bar works!</p>
+<div class="bg-primary p-3">
+  <div class="container">
+    <div class="form row g-3">
+      <div class="col-auto">
+        <input type="text" class="search__field form-control" />
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">
+          <img src="../../../assets/Search.svg" alt="Search-icon" />
+        </button>
+      </div>
+    </div>
+    <div class="theme">
+      <img
+        [src]="
+          isLight ? '../../../assets/Light.svg' : '../../../assets/Dark.svg'
+        "
+        alt="Theme-icon"
+      />
+    </div>
+  </div>
+</div>

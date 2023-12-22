@@ -1,0 +1,40 @@
+.container {
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 10rem;
+  transition: all 0.3s ease 0s;
+  &:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 0.7rem 3rem rgba(97, 85, 81, 0.08);
+  }
+}
+
+.search__field {
+  border: none;
+  outline: none;
+  background: #fff;
+  font-size: 1.7rem;
+  width: 30rem;
+}
+
+button {
+  height: 3rem;
+  transform: translate(-60px);
+}
+
+.theme {
+  img {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+  }
+}
