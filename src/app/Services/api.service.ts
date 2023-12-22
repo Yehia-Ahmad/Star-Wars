@@ -5,13 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class APIService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getCharacterList():Observable<APIResponse>{
-    return this.http.get<APIResponse>(`${env.BASE_URL}/people`)
+  getCharacterList(): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${env.BASE_URL}people`);
   }
 }

@@ -1,6 +1,6 @@
-export interface APIResponse{
+export interface APIResponse {
   count: number;
-  next: string|null;
-  previous: string|null;
-  results: Array<Object>;
+  next: string | null;
+  previous: string | null;
+  results: Array<any>;
 }
