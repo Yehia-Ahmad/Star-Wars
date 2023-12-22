@@ -1,1 +1,51 @@
-<p>home works!</p>
+<app-search-bar></app-search-bar>
+
+<div class="container">
+  <div class="row row-cols-3 gap-4">
+    <div class="card col" style="width: 18rem" *ngFor="let item of results">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <img
+            *ngIf="item.gender == 'male'"
+            src="'../../../assets/Gender-Male.svg"
+            alt="Gender-icon"
+          />
+          <img
+            *ngIf="item.gender == 'female'"
+            src="'../../../assets/Gender-Female.svg"
+            alt="Gender-icon"
+          />
+          <span>{{ item.gender }}</span>
+        </li>
+        <li class="list-group-item">Height: {{ item.height }}cm</li>
+        <li class="list-group-item">created date: {{ item.created | date }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <div class="row row-cols-3 gap-4">
+    <div class="card col" style="width: 18rem" *ngFor="let item of results">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  </div>
+</div> -->
