@@ -1,4 +1,7 @@
-<div class="bg-primary p-3">
+<div
+  class="bg-primary p-3"
+  [ngClass]="{ 'bg-primary': !isDark, 'dark-theme': isDark }"
+>
   <div class="container">
     <form
       class="form row g-3"
@@ -22,10 +25,10 @@
         </button>
       </div>
     </form>
-    <div class="theme">
+    <div class="theme" (click)="changeTheme()">
       <img
         [src]="
-          isLight ? '../../../assets/Light.svg' : '../../../assets/Dark.svg'
+          isDark ? '../../../assets/Dark.svg' : '../../../assets/Light.svg'
         "
         alt="Theme-icon"
       />

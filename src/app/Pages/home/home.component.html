@@ -1,7 +1,7 @@
-<app-search-bar></app-search-bar>
+<app-search-bar (themeChanger)="themeChanger($event)"></app-search-bar>
 
-<div class="container mt-5">
-  <div class="row row-cols-3 gap-4">
+<div class="cards-container pt-5" [ngClass]="{ 'dark-theme': isDark }">
+  <div class="container row row-cols-3 gap-4">
     <div class="card col" style="width: 18rem" *ngFor="let item of results">
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
@@ -27,7 +27,11 @@
   </div>
 </div>
 
-<div class="mt-5" aria-label="Page navigation example">
+<div
+  class="pt-5"
+  [ngClass]="{ 'dark-theme': isDark }"
+  aria-label="Page navigation example"
+>
   <ul class="pagination justify-content-center">
     <li class="page-item" [ngClass]="{ disabled: firstPage }">
       <button class="btn bg-primary page-link" (click)="getPreviousPage()">

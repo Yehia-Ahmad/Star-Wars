@@ -7,6 +7,7 @@ import { APIService } from 'src/app/Services/api.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  isDark: boolean;
   firstPage: boolean = true;
   lastPage: boolean = false;
   pageNum: number = 1;
@@ -18,6 +19,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCharacterList();
+  }
+
+  themeChanger($event: boolean) {
+    this.isDark = $event;
   }
 
   getCharacterList() {
