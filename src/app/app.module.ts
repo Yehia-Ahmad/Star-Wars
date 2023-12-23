@@ -8,6 +8,7 @@ import { NotFoundComponent } from './Pages/not-found/not-found.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { ResultSideComponent } from './Components/result-side/result-side.component';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,15 @@ import { SearchBarComponent } from './Components/search-bar/search-bar.component
     NotFoundComponent,
     HomeComponent,
     ResultSideComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

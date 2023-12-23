@@ -21,4 +21,9 @@ export class APIService {
   getPreviousPage(previousPage: string): Observable<APIResponse> {
     return this.http.get<APIResponse>(`${previousPage}`);
   }
+
+  searchCharacter(term: string): Observable<APIResponse> {
+    term = term.trim();
+    return this.http.get<APIResponse>(`${env.BASE_URL}people/?search=${term}`);
+  }
 }
