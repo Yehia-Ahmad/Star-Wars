@@ -13,4 +13,12 @@ export class APIService {
   getCharacterList(): Observable<APIResponse> {
     return this.http.get<APIResponse>(`${env.BASE_URL}people`);
   }
+
+  getNextPage(nextPage: string): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${nextPage}`);
+  }
+
+  getPreviousPage(previousPage: string): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${previousPage}`);
+  }
 }
