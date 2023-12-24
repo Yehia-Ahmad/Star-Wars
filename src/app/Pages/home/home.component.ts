@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
 
@@ -23,6 +24,14 @@ export class HomeComponent implements OnInit {
 
   themeChanger($event: boolean) {
     this.isDark = $event;
+  }
+
+  dropHandler(event: CdkDragDrop<Array<any>>): void {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   getCharacterList() {

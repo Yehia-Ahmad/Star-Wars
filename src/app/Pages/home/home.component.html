@@ -1,8 +1,17 @@
 <app-search-bar (themeChanger)="themeChanger($event)"></app-search-bar>
 
-<div class="cards-container pt-5" [ngClass]="{ 'dark-theme': isDark }">
-  <div class="container row row-cols-3 gap-4">
-    <div class="card col" style="width: 18rem" *ngFor="let item of results">
+<div
+  class="cards-container pt-5"
+  cdkDropListGroup
+  [ngClass]="{ 'dark-theme': isDark }"
+>
+  <div
+    class="container row row-cols-3 gap-4"
+    cdkDropList
+    [cdkDropListData]="results"
+    (cdkDropListDropped)="dropHandler($event)"
+  >
+    <div class="card col" cdkDrag *ngFor="let item of results">
       <div class="card-body">
         <h5 class="card-title">{{ item.name }}</h5>
       </div>

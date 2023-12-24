@@ -9,6 +9,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { ResultSideComponent } from './Components/result-side/result-side.component';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    CdkDropListGroup,
+    CdkDropList,
+    CdkDrag,
   ],
   providers: [],
   bootstrap: [AppComponent],
