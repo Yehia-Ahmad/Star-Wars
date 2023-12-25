@@ -1,40 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
-import { SearchItemsService } from 'src/app/Services/search-items.service';
 
 @Component({
-  selector: 'app-result-side',
-  templateUrl: './result-side.component.html',
-  styleUrls: ['./result-side.component.scss'],
+  selector: 'app-pagenation',
+  templateUrl: './pagenation.component.html',
+  styleUrls: ['./pagenation.component.scss'],
 })
-export class ResultSideComponent {
+export class PagenationComponent {
+  isDark: boolean;
   firstPage: boolean = true;
   lastPage: boolean = false;
   pageNum: number = 1;
-  nextPage: string;
-  previousPage: string;
-  results: Array<any>;
+  @Input() nextPage: string;
+  @Input() previousPage: string;
+  @Output() results = new EventEmitter();
 
-  constructor(
-    private api: APIService,
-    private searchItems: SearchItemsService
-  ) {}
-
-  ngOnInit(): void {
-    this.getCharacterList();
-  }
-
-  getCharacterList() {
-    return this.searchItems.newItems.subscribe((res: any) => {
-      this.results = res.results;
-      this.nextPage = res.next;
-      this.previousPage = res.previous;
-    });
-  }
+  constructor(private api: APIService) {}
 
   getNextPage() {
     return this.api.getNextPage(this.nextPage).subscribe((res: any) => {
-      this.results = res.results;
+      this.results.emit(res.results);
       this.nextPage = res.next;
       this.previousPage = res.previous;
       this.pageNum += 1;
@@ -44,7 +29,7 @@ export class ResultSideComponent {
 
   getPreviousPage() {
     return this.api.getPreviousPage(this.previousPage).subscribe((res: any) => {
-      this.results = res.results;
+      this.results.emit(res.results);
       this.nextPage = res.next;
       this.previousPage = res.previous;
       this.pageNum -= 1;

@@ -46,14 +46,12 @@ export class SearchBarComponent implements OnInit {
         results: res.results,
       };
       this.searchItems.newItems.next(newItem);
-      console.log(res);
-      console.log(this.searchItems.newItems.value);
     });
   }
 
   submitFormHandler(form: FormGroup) {
     let term: string = this.searchForm.value.search || '';
-    console.log(term);
+
     this.searchCharacter(term);
     this.router.navigate(['results']);
   }

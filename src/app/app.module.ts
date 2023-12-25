@@ -6,18 +6,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './Pages/not-found/not-found.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { ResultSideComponent } from './Components/result-side/result-side.component';
 import { SearchBarComponent } from './Components/search-bar/search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
+import { PagenationComponent } from './Components/pagenation/pagenation.component';
+import { CardListComponent } from './Components/card-list/card-list.component';
+import { ResultsComponent } from './Pages/results/results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     HomeComponent,
-    ResultSideComponent,
     SearchBarComponent,
+    PagenationComponent,
+    CardListComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,

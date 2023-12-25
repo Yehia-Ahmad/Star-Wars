@@ -1,0 +1,41 @@
+<div
+  class="cards-container pt-5"
+  cdkDropListGroup
+  [ngClass]="{ 'dark-theme': isDark }"
+>
+  <div
+    class="container row row-cols-3 gap-4"
+    cdkDropList
+    [cdkDropListData]="results"
+    (cdkDropListDropped)="dropHandler($event)"
+  >
+    <div class="card col" cdkDrag *ngFor="let item of results">
+      <div class="card-body">
+        <h5 class="card-title">{{ item.name }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <img
+            *ngIf="item.gender == 'male'"
+            src="'../../../assets/Gender-Male.svg"
+            alt="Gender-icon"
+          />
+          <img
+            *ngIf="item.gender == 'female'"
+            src="'../../../assets/Gender-Female.svg"
+            alt="Gender-icon"
+          />
+          <span>{{ item.gender }}</span>
+        </li>
+        <li class="list-group-item">Height: {{ item.height }}cm</li>
+        <li class="list-group-item">created date: {{ item.created | date }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<app-pagenation
+  [nextPage]="nextPage"
+  [previousPage]="previousPage"
+  (results)="newPage($event)"
+></app-pagenation>

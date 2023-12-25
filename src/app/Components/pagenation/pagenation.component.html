@@ -1,0 +1,21 @@
+<div
+  class="pt-5"
+  [ngClass]="{ 'dark-theme': isDark }"
+  aria-label="Page navigation example"
+>
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{ disabled: firstPage }">
+      <button class="btn bg-primary page-link" (click)="getPreviousPage()">
+        <img src="../../../assets/left-arrow.svg" alt="left-arrow-icon" />
+      </button>
+    </li>
+    <li class="page-item">
+      <span class="page-link">{{ pageNum }}</span>
+    </li>
+    <li class="page-item" [ngClass]="{ disabled: lastPage }">
+      <button class="btn bg-primary page-link" (click)="getNextPage()">
+        <img src="../../../assets/right-arrow.svg" alt="right-arrow-icon" />
+      </button>
+    </li>
+  </ul>
+</div>
