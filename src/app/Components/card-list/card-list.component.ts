@@ -1,5 +1,6 @@
+import { ThemeService } from './../../Services/theme.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
 
 @Component({
@@ -7,14 +8,24 @@ import { APIService } from 'src/app/Services/api.service';
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
 })
-export class CardListComponent {
+export class CardListComponent implements OnInit {
   isDark: boolean;
   @Input() nextPage: string;
   @Input() previousPage: string;
   @Input() results: Array<any>;
 
-  themeChanger($event: boolean) {
-    this.isDark = $event;
+  constructor(private theme: ThemeService) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.themeChanger();
+  }
+
+  themeChanger() {
+    this.theme.isDark.subscribe((res: boolean) => {
+      this.isDark = res;
+    });
   }
 
   dropHandler(event: CdkDragDrop<Array<any>>): void {

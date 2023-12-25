@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
+import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
   selector: 'app-pagenation',
   templateUrl: './pagenation.component.html',
   styleUrls: ['./pagenation.component.scss'],
 })
-export class PagenationComponent {
+export class PagenationComponent implements OnInit {
   isDark: boolean;
   firstPage: boolean = true;
   lastPage: boolean = false;
@@ -15,7 +16,19 @@ export class PagenationComponent {
   @Input() previousPage: string;
   @Output() results = new EventEmitter();
 
-  constructor(private api: APIService) {}
+  constructor(private api: APIService, private theme: ThemeService) {}
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.themeChanger();
+  }
+
+  themeChanger() {
+    this.theme.isDark.subscribe((res: boolean) => {
+      this.isDark = res;
+    });
+  }
 
   getNextPage() {
     return this.api.getNextPage(this.nextPage).subscribe((res: any) => {
