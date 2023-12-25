@@ -3,6 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  & > .container {
+    margin-left: 15rem;
+  }
 }
 
 .list-group-item {
