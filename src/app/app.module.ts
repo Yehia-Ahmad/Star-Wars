@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { PagenationComponent } from './Components/pagenation/pagenation.component';
 import { CardListComponent } from './Components/card-list/card-list.component';
 import { ResultsComponent } from './Pages/results/results.component';
+import { LoadingInterceptor } from './Interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { ResultsComponent } from './Pages/results/results.component';
     CdkDropList,
     CdkDrag,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
