@@ -31,7 +31,8 @@ export class PagenationComponent implements OnInit {
   }
 
   getNextPage() {
-    return this.api.getNextPage(this.nextPage).subscribe((res: any) => {
+    let pageNum = this.nextPage.slice(-1);
+    return this.api.getNewPage(pageNum).subscribe((res: any) => {
       this.results.emit(res.results);
       this.nextPage = res.next;
       this.previousPage = res.previous;
@@ -41,7 +42,8 @@ export class PagenationComponent implements OnInit {
   }
 
   getPreviousPage() {
-    return this.api.getPreviousPage(this.previousPage).subscribe((res: any) => {
+    let pageNum = this.previousPage.slice(-1);
+    return this.api.getNewPage(pageNum).subscribe((res: any) => {
       this.results.emit(res.results);
       this.nextPage = res.next;
       this.previousPage = res.previous;

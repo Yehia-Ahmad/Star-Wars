@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { APIResponse } from '../Models';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
 
 @Injectable({
@@ -14,16 +14,18 @@ export class APIService {
     return this.http.get<APIResponse>(`${env.BASE_URL}people`);
   }
 
-  getNextPage(nextPage: string): Observable<APIResponse> {
-    return this.http.get<APIResponse>(`${nextPage}`);
-  }
-
-  getPreviousPage(previousPage: string): Observable<APIResponse> {
-    return this.http.get<APIResponse>(`${previousPage}`);
+  getNewPage(pageNum: string): Observable<APIResponse> {
+    const params = new HttpParams().set('page', pageNum);
+    return this.http.get<APIResponse>(`${env.BASE_URL}people`, {
+      params: params,
+    });
   }
 
   searchCharacter(term: string): Observable<APIResponse> {
     term = term.trim();
-    return this.http.get<APIResponse>(`${env.BASE_URL}people/?search=${term}`);
+    const params = new HttpParams().set('search', term);
+    return this.http.get<APIResponse>(`${env.BASE_URL}people`, {
+      params: params,
+    });
   }
 }
