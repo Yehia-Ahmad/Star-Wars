@@ -1,9 +1,13 @@
 .overlay {
+  display: flex;
+  position: absolute;
+  justify-content: center;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
-  position: absolute;
+  bottom: 0;
   z-index: 2;
+  height: 1700px;
+  padding-top: 20rem;
   backdrop-filter: blur(2px);
 }
