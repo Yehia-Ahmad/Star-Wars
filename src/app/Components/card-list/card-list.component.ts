@@ -10,6 +10,8 @@ import { APIService } from 'src/app/Services/api.service';
 })
 export class CardListComponent implements OnInit {
   isDark: boolean;
+  maleGender: string = '../../../assets/Gender-Male.svg';
+  femaleGender: string = '../../../assets/Gender-Female.svg';
   @Input() nextPage: string;
   @Input() previousPage: string;
   @Input() results: Array<any>;
@@ -25,6 +27,13 @@ export class CardListComponent implements OnInit {
   themeChanger() {
     this.theme.isDark.subscribe((res: boolean) => {
       this.isDark = res;
+      if (this.isDark === true) {
+        this.maleGender = '../../../assets/Gender-Male-Light.svg';
+        this.femaleGender = '../../../assets/Gender-Female-Light.svg';
+      } else {
+        this.maleGender = '../../../assets/Gender-Male.svg';
+        this.femaleGender = '../../../assets/Gender-Female.svg';
+      }
     });
   }
 

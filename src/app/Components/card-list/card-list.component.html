@@ -1,28 +1,46 @@
 <div
-  class="cards-container pt-5"
+  class="cards-container"
   cdkDropListGroup
   [ngClass]="{ 'dark-theme': isDark }"
 >
   <div
-    class="container row row-cols-3 gap-4"
+    class="container"
     cdkDropList
     [cdkDropListData]="results"
     (cdkDropListDropped)="dropHandler($event)"
   >
-    <div class="card col" cdkDrag *ngFor="let item of results">
+    <div class="card" cdkDrag *ngFor="let item of results">
       <div class="card-body">
+        <img
+          *ngIf="item.gender == 'male'"
+          class="profile-icon"
+          src="'../../../assets/man.png"
+          alt="Profile-icon"
+        />
+        <img
+          *ngIf="item.gender == 'female'"
+          class="profile-icon"
+          src="'../../../assets/woman.png"
+          alt="Profile-icon"
+        />
+        <img
+          *ngIf="item.gender == 'n/a'"
+          class="profile-icon"
+          src="'../../../assets/ambiguous.png"
+          alt="Profile-icon"
+        />
         <h5 class="card-title">{{ item.name }}</h5>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <img
             *ngIf="item.gender == 'male'"
-            src="'../../../assets/Gender-Male.svg"
+            [src]="maleGender"
             alt="Gender-icon"
           />
           <img
             *ngIf="item.gender == 'female'"
-            src="'../../../assets/Gender-Female.svg"
+            [src]="femaleGender"
             alt="Gender-icon"
           />
           <span>{{ item.gender }}</span>
