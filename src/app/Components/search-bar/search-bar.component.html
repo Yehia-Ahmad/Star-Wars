@@ -1,32 +1,22 @@
-<div
-  class="bg-primary p-3 header"
-  [ngClass]="{ 'bg-primary': !isDark, 'dark-theme': isDark }"
->
+<div class="header" [ngClass]="{ 'bg-primary': !isDark, 'dark-theme': isDark }">
   <nav>
     <span class="title">SW App</span>
   </nav>
   <div class="container">
     <form
-      class="form row g-3"
+      class="form"
       [formGroup]="searchForm"
       (ngSubmit)="submitFormHandler(searchForm)"
     >
-      <div class="col-auto">
-        <input
-          type="text"
-          class="search__field form-control"
-          formControlName="search"
-        />
-      </div>
-      <div class="col-auto">
-        <button
-          type="submit"
-          [disabled]="searchForm.invalid"
-          class="btn btn-primary"
-        >
-          <img src="../../../assets/Search.svg" alt="Search-icon" />
-        </button>
-      </div>
+      <input
+        type="text"
+        class="search__field form-control"
+        formControlName="search"
+        matInput
+      />
+      <button mat-raised-button color="primary">
+        <img src="../../../assets/Search.svg" alt="Search-icon" />
+      </button>
     </form>
     <div class="theme" (click)="changeTheme()">
       <img

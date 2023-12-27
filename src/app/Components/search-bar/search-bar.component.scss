@@ -1,6 +1,13 @@
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  background-color: #6200ee;
+  height: 13vh;
 }
 
 .title {
@@ -33,13 +40,16 @@
   border: none;
   outline: none;
   background: #fff;
-  font-size: 1.7rem;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  height: 2.2rem;
   width: 30rem;
 }
 
 button {
   height: 3rem;
-  transform: translate(-60px);
+  width: 3rem;
+  transform: translate(-65px, 0.5px);
 }
 
 .theme {
