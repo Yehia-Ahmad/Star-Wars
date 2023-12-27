@@ -11,12 +11,10 @@ export class LoadingService {
   constructor() {}
 
   show() {
-    console.log('loading begain');
     this._loading.next(true);
   }
 
   hide() {
-    console.log('loading end');
     this._loading.next(false);
   }
 }

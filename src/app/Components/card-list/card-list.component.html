@@ -53,6 +53,8 @@
 </div>
 
 <app-pagenation
+  *ngIf="count > 10"
+  [finalPage]="finalPage"
   [nextPage]="nextPage"
   [previousPage]="previousPage"
   (results)="newPage($event)"

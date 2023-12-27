@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/Services/api.service';
@@ -10,7 +10,7 @@ import { ThemeService } from 'src/app/Services/theme.service';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
   isDark: boolean;
   @Output() themeChanger = new EventEmitter();
   searchForm = this.formBuilder.group({
@@ -27,11 +27,6 @@ export class SearchBarComponent implements OnInit {
     this.isDark = this.theme.isDark.value;
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-  }
-
   changeTheme() {
     this.theme.isDark.next(!this.isDark);
     this.isDark = this.theme.isDark.value;
@@ -41,6 +36,7 @@ export class SearchBarComponent implements OnInit {
   searchCharacter(term: string) {
     return this.api.searchCharacter(term).subscribe((res: any) => {
       let newItem: any = {
+        count: res.count,
         next: res.next,
         previous: res.previous,
         results: res.results,
@@ -51,7 +47,6 @@ export class SearchBarComponent implements OnInit {
 
   submitFormHandler(form: FormGroup) {
     let term: string = this.searchForm.value.search || '';
-
     this.searchCharacter(term);
     this.router.navigate(['results']);
   }

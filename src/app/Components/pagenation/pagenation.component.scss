@@ -1,0 +1,41 @@
+.pagenation {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > .pagination-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    & > .page {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      button {
+        width: 2rem;
+        background-color: #dfdfdf;
+        outline: none;
+        border: 0.5px solid #dfdfdf;
+        margin: 0 0.2rem;
+        text-align: center;
+      }
+    }
+
+    & > .page-item {
+      & > .btn {
+        margin: 0 0.5rem;
+        cursor: pointer;
+        background-color: #6800ee;
+        outline: none;
+        border: none;
+      }
+    }
+  }
+}

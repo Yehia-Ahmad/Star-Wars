@@ -1,17 +1,24 @@
 import { ThemeService } from './../../Services/theme.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
-import { APIService } from 'src/app/Services/api.service';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
 })
-export class CardListComponent implements OnInit {
+export class CardListComponent implements OnInit, OnChanges {
   isDark: boolean;
   maleGender: string = '../../../assets/Gender-Male.svg';
   femaleGender: string = '../../../assets/Gender-Female.svg';
+  finalPage: number;
+  @Input() count: number;
   @Input() nextPage: string;
   @Input() previousPage: string;
   @Input() results: Array<any>;
@@ -19,9 +26,19 @@ export class CardListComponent implements OnInit {
   constructor(private theme: ThemeService) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.themeChanger();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.count > 10) {
+      let reminder = this.count % 10;
+      let temp = Math.floor(this.count / 10);
+      if (reminder > 0) {
+        this.finalPage = temp + 1;
+      }
+    } else {
+      this.finalPage = 0;
+    }
   }
 
   themeChanger() {

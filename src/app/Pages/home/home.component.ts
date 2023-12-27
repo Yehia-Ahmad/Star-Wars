@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
 
@@ -9,6 +8,7 @@ import { APIService } from 'src/app/Services/api.service';
 })
 export class HomeComponent implements OnInit {
   isDark: boolean;
+  count: number;
   nextPage: string;
   previousPage: string;
   results: Array<any>;
@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
 
   getCharacterList() {
     return this.api.getCharacterList().subscribe((res: any) => {
+      this.count = res.count;
       this.results = res.results;
       this.nextPage = res.next;
       this.previousPage = res.previous;

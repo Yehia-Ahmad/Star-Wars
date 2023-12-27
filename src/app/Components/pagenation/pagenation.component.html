@@ -1,19 +1,23 @@
 <div
-  class="pt-5"
+  class="pagenation"
   [ngClass]="{ 'dark-theme': isDark }"
   aria-label="Page navigation example"
 >
-  <ul class="pagination justify-content-center">
+  <ul class="pagination-list">
     <li class="page-item" [ngClass]="{ disabled: firstPage }">
-      <button class="btn bg-primary page-link" (click)="getPreviousPage()">
+      <button class="btn" (click)="getPreviousPage()">
         <img src="../../../assets/left-arrow.svg" alt="left-arrow-icon" />
       </button>
     </li>
-    <li class="page-item">
-      <span class="page-link">{{ pageNum }}</span>
+    <li class="page">
+      <button class="active-page">{{ pageNum }}</button>
+      <button *ngIf="finalPage && finalPage != 0">...</button>
+      <button class="final-page" *ngIf="finalPage && finalPage != 0">
+        {{ finalPage }}
+      </button>
     </li>
     <li class="page-item" [ngClass]="{ disabled: lastPage }">
-      <button class="btn bg-primary page-link" (click)="getNextPage()">
+      <button class="btn" (click)="getNextPage()">
         <img src="../../../assets/right-arrow.svg" alt="right-arrow-icon" />
       </button>
     </li>

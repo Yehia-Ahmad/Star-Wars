@@ -12,6 +12,7 @@ export class PagenationComponent implements OnInit {
   firstPage: boolean = true;
   lastPage: boolean = false;
   pageNum: number = 1;
+  @Input() finalPage: number;
   @Input() nextPage: string;
   @Input() previousPage: string;
   @Output() results = new EventEmitter();
@@ -19,8 +20,6 @@ export class PagenationComponent implements OnInit {
   constructor(private api: APIService, private theme: ThemeService) {}
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.themeChanger();
   }
 
