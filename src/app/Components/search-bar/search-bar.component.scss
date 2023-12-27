@@ -44,17 +44,32 @@
   border-radius: 5px;
   font-size: 1.2rem;
   height: 2.2rem;
-  width: 30rem;
+  width: 20rem;
 }
 
 button {
   height: 3rem;
   width: 3rem;
-  transform: translate(-65px, 0.5px);
+  transform: translate(-65px, 0px);
 }
 
 .theme {
-  img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > button {
+    border: none;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    background: #3f51b5;
+    margin-right: 5rem;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    width: 5rem;
+  }
+  & > img {
     width: 2rem;
     height: 2rem;
     cursor: pointer;

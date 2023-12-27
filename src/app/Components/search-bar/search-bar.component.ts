@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/Services/api.service';
 import { SearchItemsService } from 'src/app/Services/search-items.service';
@@ -22,9 +23,14 @@ export class SearchBarComponent {
     private api: APIService,
     private theme: ThemeService,
     private formBuilder: FormBuilder,
+    private location: Location,
     private searchItems: SearchItemsService
   ) {
     this.isDark = this.theme.isDark.value;
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   changeTheme() {
