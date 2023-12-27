@@ -41,6 +41,9 @@ export class SearchBarComponent {
         previous: res.previous,
         results: res.results,
       };
+      if (res.count === 0) {
+        this.router.navigate(['notfound']);
+      }
       this.searchItems.newItems.next(newItem);
     });
   }
