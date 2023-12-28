@@ -15,7 +15,6 @@ import { SearchBarComponent } from './Components/search-bar/search-bar.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { PagenationComponent } from './Components/pagenation/pagenation.component';
 import { CardListComponent } from './Components/card-list/card-list.component';
-import { ResultsComponent } from './Pages/results/results.component';
 import { LoadingInterceptor } from './Interceptors/loading.interceptor';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { LoadingInterceptor } from './Interceptors/loading.interceptor';
     SearchBarComponent,
     PagenationComponent,
     CardListComponent,
-    ResultsComponent,
   ],
   imports: [
     BrowserModule,
