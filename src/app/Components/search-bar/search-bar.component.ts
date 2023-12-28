@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { APIService } from 'src/app/Services/api.service';
 import { ThemeService } from 'src/app/Services/theme.service';
 
@@ -11,16 +11,19 @@ import { ThemeService } from 'src/app/Services/theme.service';
 })
 export class SearchBarComponent implements OnInit {
   isDark: boolean;
+  arBtn: string = 'primary';
+  enBtn: string = 'accent';
   @Output() newCardList = new EventEmitter();
+  @Output() rightDirection = new EventEmitter();
   searchForm = this.formBuilder.group({
     search: [null, Validators.required],
   });
 
   constructor(
-    private router: Router,
     private api: APIService,
     private theme: ThemeService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +39,21 @@ export class SearchBarComponent implements OnInit {
     this.theme.setItem('isDark', this.isDark);
   }
 
+  switchLang(lang: string) {
+    this.translate.use(lang);
+    if (lang == 'ar') {
+      console.log('ar');
+      this.arBtn = 'accent';
+      this.enBtn = 'primary';
+      this.rightDirection.emit(true);
+    } else if (lang == 'en') {
+      console.log('en');
+      this.arBtn = 'primary';
+      this.enBtn = 'accent';
+      this.rightDirection.emit(false);
+    }
+  }
+
   searchCharacter(term: string) {
     return this.api.searchCharacter(term).subscribe((res: any) => {
       let newItem: any = {
@@ -44,9 +62,6 @@ export class SearchBarComponent implements OnInit {
         previous: res.previous,
         results: res.results,
       };
-      // if (res.count === 0) {
-      //   this.router.navigate(['notfound']);
-      // }
       this.newCardList.emit(newItem);
     });
   }

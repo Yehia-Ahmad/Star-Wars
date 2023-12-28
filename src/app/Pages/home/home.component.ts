@@ -9,6 +9,7 @@ import { ThemeService } from 'src/app/Services/theme.service';
 })
 export class HomeComponent implements OnInit {
   isDark: boolean;
+  rightDirection: boolean = false;
   count: number;
   nextPage: string;
   previousPage: string;
@@ -22,6 +23,10 @@ export class HomeComponent implements OnInit {
     this.theme.isDark.subscribe((res: boolean) => {
       this.isDark = res;
     });
+  }
+
+  updateDirectionHandler(event: boolean) {
+    this.rightDirection = event;
   }
 
   updateCardListHandler(newResponse: any) {

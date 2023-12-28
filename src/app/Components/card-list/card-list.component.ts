@@ -18,6 +18,7 @@ export class CardListComponent implements OnInit, OnChanges {
   maleGender: string = '../../../assets/Gender-Male.svg';
   femaleGender: string = '../../../assets/Gender-Female.svg';
   finalPage: number;
+  @Input() rightDirection: boolean;
   @Input() count: number;
   @Input() nextPage: string;
   @Input() previousPage: string;

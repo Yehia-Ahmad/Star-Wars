@@ -4,7 +4,6 @@
   </nav>
   <div class="container">
     <form class="form" [formGroup]="searchForm">
-      <!-- (ngSubmit)="submitFormHandler(searchForm)" -->
       <input
         type="text"
         class="search__field form-control"
@@ -34,6 +33,14 @@
         <img src="../../../assets/Search.svg" alt="Search-icon" />
       </button>
     </form>
+    <div class="translation">
+      <button (click)="switchLang('en')" mat-raised-button [color]="enBtn">
+        EN
+      </button>
+      <button (click)="switchLang('ar')" mat-raised-button [color]="arBtn">
+        AR
+      </button>
+    </div>
     <div class="theme" (click)="changeTheme()">
       <img
         [src]="

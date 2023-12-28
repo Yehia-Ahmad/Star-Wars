@@ -1,6 +1,10 @@
-<app-search-bar (newCardList)="updateCardListHandler($event)"></app-search-bar>
+<app-search-bar
+  (newCardList)="updateCardListHandler($event)"
+  (rightDirection)="updateDirectionHandler($event)"
+></app-search-bar>
 
 <app-card-list
+  [rightDirection]="rightDirection"
   [count]="count"
   [nextPage]="nextPage"
   [previousPage]="previousPage"
