@@ -23,6 +23,13 @@ export class HomeComponent implements OnInit {
     this.isDark = $event;
   }
 
+  updateCardListHandler(newResponse: any) {
+    this.count = newResponse.count;
+    this.nextPage = newResponse.nextPage;
+    this.previousPage = newResponse.previousPage;
+    this.results = newResponse.results;
+  }
+
   getCharacterList() {
     return this.api.getCharacterList().subscribe((res: any) => {
       this.count = res.count;

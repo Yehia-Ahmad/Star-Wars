@@ -1,4 +1,7 @@
-<app-search-bar (themeChanger)="themeChanger($event)"></app-search-bar>
+<app-search-bar
+  (themeChanger)="themeChanger($event)"
+  (newCardList)="updateCardListHandler($event)"
+></app-search-bar>
 
 <app-card-list
   [count]="count"

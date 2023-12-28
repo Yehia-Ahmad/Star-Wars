@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/Services/api.service';
-import { SearchItemsService } from 'src/app/Services/search-items.service';
 import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
@@ -14,23 +12,18 @@ import { ThemeService } from 'src/app/Services/theme.service';
 export class SearchBarComponent {
   isDark: boolean;
   @Output() themeChanger = new EventEmitter();
+  @Output() newCardList = new EventEmitter();
   searchForm = this.formBuilder.group({
-    search: ['', Validators.required],
+    search: [null, Validators.required],
   });
 
   constructor(
     private router: Router,
     private api: APIService,
     private theme: ThemeService,
-    private formBuilder: FormBuilder,
-    private location: Location,
-    private searchItems: SearchItemsService
+    private formBuilder: FormBuilder
   ) {
     this.isDark = this.theme.isDark.value;
-  }
-
-  goBack() {
-    this.location.back();
   }
 
   changeTheme() {
@@ -50,13 +43,18 @@ export class SearchBarComponent {
       if (res.count === 0) {
         this.router.navigate(['notfound']);
       }
-      this.searchItems.newItems.next(newItem);
+      this.newCardList.emit(newItem);
     });
   }
 
-  submitFormHandler(form: FormGroup) {
-    let term: string = this.searchForm.value.search || '';
-    this.searchCharacter(term);
-    this.router.navigate(['results']);
+  submitFormHandler() {
+    let term: string | null | undefined = this.searchForm.value.search;
+    if (term != null) {
+      this.searchCharacter(term);
+    }
+  }
+
+  clearForm() {
+    this.searchForm.reset();
   }
 }

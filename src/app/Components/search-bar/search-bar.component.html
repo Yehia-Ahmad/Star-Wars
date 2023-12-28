@@ -3,23 +3,38 @@
     <span class="title">SW App</span>
   </nav>
   <div class="container">
-    <form
-      class="form"
-      [formGroup]="searchForm"
-      (ngSubmit)="submitFormHandler(searchForm)"
-    >
+    <form class="form" [formGroup]="searchForm">
+      <!-- (ngSubmit)="submitFormHandler(searchForm)" -->
       <input
         type="text"
         class="search__field form-control"
         formControlName="search"
         matInput
       />
-      <button mat-raised-button color="primary">
+
+      <button
+        class="clear__button"
+        [disabled]="searchForm.invalid"
+        (click)="clearForm()"
+      >
+        <img
+          *ngIf="this.searchForm.value.search != null"
+          src="../../../assets/Cancel.svg"
+          alt="Cancel-icon"
+        />
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit__button"
+        [disabled]="searchForm.invalid"
+        (click)="submitFormHandler()"
+      >
         <img src="../../../assets/Search.svg" alt="Search-icon" />
       </button>
     </form>
     <div class="theme" (click)="changeTheme()">
-      <button (click)="goBack()">Home</button>
       <img
         [src]="
           isDark ? '../../../assets/Dark.svg' : '../../../assets/Light.svg'
