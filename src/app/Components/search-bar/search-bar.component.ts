@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/Services/api.service';
@@ -9,9 +9,8 @@ import { ThemeService } from 'src/app/Services/theme.service';
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
   isDark: boolean;
-  @Output() themeChanger = new EventEmitter();
   @Output() newCardList = new EventEmitter();
   searchForm = this.formBuilder.group({
     search: [null, Validators.required],
@@ -22,14 +21,19 @@ export class SearchBarComponent {
     private api: APIService,
     private theme: ThemeService,
     private formBuilder: FormBuilder
-  ) {
-    this.isDark = this.theme.isDark.value;
+  ) {}
+
+  ngOnInit(): void {
+    this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
+    this.theme.isDark.subscribe((res: boolean) => {
+      this.isDark = res;
+    });
   }
 
   changeTheme() {
     this.theme.isDark.next(!this.isDark);
     this.isDark = this.theme.isDark.value;
-    this.themeChanger.emit(this.isDark);
+    this.theme.setItem('isDark', this.isDark);
   }
 
   searchCharacter(term: string) {

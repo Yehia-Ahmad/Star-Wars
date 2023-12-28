@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
+import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +14,14 @@ export class HomeComponent implements OnInit {
   previousPage: string;
   results: Array<any>;
 
-  constructor(private api: APIService) {}
+  constructor(private api: APIService, private theme: ThemeService) {}
 
   ngOnInit(): void {
     this.getCharacterList();
-  }
-
-  themeChanger($event: boolean) {
-    this.isDark = $event;
+    this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
+    this.theme.isDark.subscribe((res: boolean) => {
+      this.isDark = res;
+    });
   }
 
   updateCardListHandler(newResponse: any) {

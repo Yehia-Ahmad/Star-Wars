@@ -26,6 +26,10 @@ export class CardListComponent implements OnInit, OnChanges {
   constructor(private theme: ThemeService) {}
 
   ngOnInit(): void {
+    this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
+    this.theme.isDark.subscribe((res: boolean) => {
+      this.isDark = res;
+    });
     this.themeChanger();
   }
 
