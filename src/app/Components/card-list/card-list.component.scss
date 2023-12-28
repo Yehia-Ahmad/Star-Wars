@@ -12,6 +12,7 @@
     overflow-x: hidden;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+
     & > .card {
       display: flex;
       flex-direction: column;
@@ -31,6 +32,22 @@
         }
       }
     }
+  }
+}
+
+.search__failure {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > .content {
+    font-size: 1.5rem;
+    color: #6200ee;
+    margin: 2rem;
+  }
+  & > img {
+    width: 5rem;
+    height: 5rem;
   }
 }
 

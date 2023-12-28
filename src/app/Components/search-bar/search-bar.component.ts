@@ -44,9 +44,9 @@ export class SearchBarComponent implements OnInit {
         previous: res.previous,
         results: res.results,
       };
-      if (res.count === 0) {
-        this.router.navigate(['notfound']);
-      }
+      // if (res.count === 0) {
+      //   this.router.navigate(['notfound']);
+      // }
       this.newCardList.emit(newItem);
     });
   }
