@@ -16,6 +16,7 @@ export class NavBarComponent implements OnInit {
   enBtn: string = 'accent';
   @Output() newCardList = new EventEmitter();
   @Output() rightDirection = new EventEmitter();
+  @Output() switchLangHandler = new EventEmitter();
   searchForm = this.formBuilder.group({
     search: [null, Validators.required],
   });
@@ -34,10 +35,7 @@ export class NavBarComponent implements OnInit {
       this.isDark = res;
     });
     this.language.lang.next(this.language.getItem('lang'));
-    this.language.lang.subscribe((res: string) => {
-      this.switchLang(res);
-      this.switchLangEffect(res);
-    });
+    this.switchLangEffect(this.language.lang.value);
   }
 
   changeTheme() {

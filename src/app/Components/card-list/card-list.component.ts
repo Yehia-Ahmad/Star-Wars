@@ -7,6 +7,8 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from 'src/app/Services/language.service';
 
 @Component({
   selector: 'app-card-list',
@@ -25,7 +27,11 @@ export class CardListComponent implements OnInit, OnChanges {
   @Input() previousPage: string;
   @Input() results: Array<any>;
 
-  constructor(private theme: ThemeService) {}
+  constructor(
+    private theme: ThemeService,
+    private language: LanguageService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
@@ -36,8 +42,11 @@ export class CardListComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['results'].currentValue) {
+    if (changes['results']) {
       this.length = changes['results'].currentValue.length;
+      this.language.lang.subscribe((res: string) => {
+        this.translate.use(res);
+      });
     }
     if (this.count > 10) {
       let reminder = this.count % 10;
