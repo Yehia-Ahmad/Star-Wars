@@ -1,6 +1,12 @@
 import { ThemeService } from './../../Services/theme.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-card-list',
@@ -12,6 +18,7 @@ export class CardListComponent implements OnInit, OnChanges {
   maleGender: string = '../../../assets/Gender-Male.svg';
   femaleGender: string = '../../../assets/Gender-Female.svg';
   finalPage: number;
+  length: number = 1;
   @Input() rightDirection: boolean;
   @Input() count: number;
   @Input() nextPage: string;
@@ -28,7 +35,10 @@ export class CardListComponent implements OnInit, OnChanges {
     this.themeChanger();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['results'].currentValue) {
+      this.length = changes['results'].currentValue.length;
+    }
     if (this.count > 10) {
       let reminder = this.count % 10;
       let temp = Math.floor(this.count / 10);
