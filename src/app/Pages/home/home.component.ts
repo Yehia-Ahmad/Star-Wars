@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { APIService } from 'src/app/Services/api.service';
+import { LanguageService } from 'src/app/Services/language.service';
 import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
@@ -15,13 +16,23 @@ export class HomeComponent implements OnInit {
   previousPage: string;
   results: Array<any>;
 
-  constructor(private api: APIService, private theme: ThemeService) {}
+  constructor(
+    private api: APIService,
+    private theme: ThemeService,
+    private language: LanguageService
+  ) {}
 
   ngOnInit(): void {
     this.getCharacterList();
     this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
     this.theme.isDark.subscribe((res: boolean) => {
       this.isDark = res;
+    });
+
+    this.language.lang.subscribe((res: string) => {
+      res == 'en'
+        ? this.updateDirectionHandler(false)
+        : this.updateDirectionHandler(true);
     });
   }
 

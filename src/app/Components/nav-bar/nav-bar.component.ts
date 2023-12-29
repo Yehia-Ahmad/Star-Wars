@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { APIService } from 'src/app/Services/api.service';
+import { LanguageService } from 'src/app/Services/language.service';
 import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class NavBarComponent implements OnInit {
   constructor(
     private api: APIService,
     private theme: ThemeService,
+    private language: LanguageService,
     private formBuilder: FormBuilder,
     private translate: TranslateService
   ) {}
@@ -30,6 +32,11 @@ export class NavBarComponent implements OnInit {
     this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
     this.theme.isDark.subscribe((res: boolean) => {
       this.isDark = res;
+    });
+    this.language.lang.next(this.language.getItem('lang'));
+    this.language.lang.subscribe((res: string) => {
+      this.switchLang(res);
+      this.switchLangEffect(res);
     });
   }
 
@@ -41,13 +48,16 @@ export class NavBarComponent implements OnInit {
 
   switchLang(lang: string) {
     this.translate.use(lang);
+    this.language.setItem('lang', lang);
+    this.switchLangEffect(lang);
+  }
+
+  switchLangEffect(lang: string) {
     if (lang == 'ar') {
-      console.log('ar');
       this.arBtn = 'accent';
       this.enBtn = 'primary';
       this.rightDirection.emit(true);
     } else if (lang == 'en') {
-      console.log('en');
       this.arBtn = 'primary';
       this.enBtn = 'accent';
       this.rightDirection.emit(false);
