@@ -1,12 +1,6 @@
 import { ThemeService } from './../../Services/theme.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-list',
@@ -34,7 +28,7 @@ export class CardListComponent implements OnInit, OnChanges {
     this.themeChanger();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.count > 10) {
       let reminder = this.count % 10;
       let temp = Math.floor(this.count / 10);
