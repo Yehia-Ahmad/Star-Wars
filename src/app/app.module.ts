@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './Pages/not-found/not-found.component';
 import { HomeComponent } from './Pages/home/home.component';
-import { SearchBarComponent } from './Components/search-bar/search-bar.component';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PagenationComponent } from './Components/pagenation/pagenation.component';
 import { CardListComponent } from './Components/card-list/card-list.component';
@@ -32,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     NotFoundComponent,
     HomeComponent,
-    SearchBarComponent,
+    NavBarComponent,
     PagenationComponent,
     CardListComponent,
   ],

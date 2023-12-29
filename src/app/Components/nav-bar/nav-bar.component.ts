@@ -5,11 +5,11 @@ import { APIService } from 'src/app/Services/api.service';
 import { ThemeService } from 'src/app/Services/theme.service';
 
 @Component({
-  selector: 'app-search-bar',
-  templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.scss'],
 })
-export class SearchBarComponent implements OnInit {
+export class NavBarComponent implements OnInit {
   isDark: boolean;
   arBtn: string = 'primary';
   enBtn: string = 'accent';
