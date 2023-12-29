@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+  constructor(private loction: Location) {}
+
+  goBack() {
+    this.loction.back();
+  }
+}
