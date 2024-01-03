@@ -1,9 +1,11 @@
+import { CharacterListService } from './../../Services/character-list.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { APIService } from 'src/app/Services/api.service';
 import { LanguageService } from 'src/app/Services/language.service';
 import { ThemeService } from 'src/app/Services/theme.service';
+import { APIResponse } from 'src/app/models';
 
 @Component({
   selector: 'app-nav-bar',
@@ -26,7 +28,8 @@ export class NavBarComponent implements OnInit {
     private theme: ThemeService,
     private language: LanguageService,
     private formBuilder: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private characterList: CharacterListService
   ) {}
 
   ngOnInit(): void {
@@ -64,13 +67,8 @@ export class NavBarComponent implements OnInit {
 
   searchCharacter(term: string) {
     return this.api.searchCharacter(term).subscribe((res: any) => {
-      let newItem: any = {
-        count: res.count,
-        next: res.next,
-        previous: res.previous,
-        results: res.results,
-      };
-      this.newCardList.emit(newItem);
+      this.characterList.newList.next(res);
+      this.characterList.pageNum.next(1);
     });
   }
 
@@ -78,10 +76,19 @@ export class NavBarComponent implements OnInit {
     let term: string | null | undefined = this.searchForm.value.search;
     if (term != null) {
       this.searchCharacter(term);
+      this.characterList.searchTerm.next(term);
     }
+  }
+
+  allCharacterList() {
+    this.api.getCharacterList().subscribe((res: APIResponse) => {
+      this.characterList.newList.next(res);
+    });
   }
 
   clearForm() {
     this.searchForm.reset();
+    this.allCharacterList();
+    this.characterList.pageNum.next(1);
   }
 }

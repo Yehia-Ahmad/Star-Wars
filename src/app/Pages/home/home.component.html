@@ -1,12 +1,3 @@
-<app-nav-bar
-  (newCardList)="updateCardListHandler($event)"
-  (rightDirection)="updateDirectionHandler($event)"
-></app-nav-bar>
+<app-nav-bar (rightDirection)="updateDirectionHandler($event)"></app-nav-bar>
 
-<app-card-list
-  [rightDirection]="rightDirection"
-  [count]="count"
-  [nextPage]="nextPage"
-  [previousPage]="previousPage"
-  [results]="results"
-></app-card-list>
+<app-card-list [rightDirection]="rightDirection"></app-card-list>

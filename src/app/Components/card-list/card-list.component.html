@@ -1,83 +1,41 @@
-<div
-  class="cards-container"
-  cdkDropListGroup
-  [ngClass]="{ 'dark-theme': isDark }"
->
-  <div
-    class="container"
-    cdkDropList
-    [cdkDropListData]="results"
-    (cdkDropListDropped)="dropHandler($event)"
-    [ngClass]="{ ar__text: rightDirection }"
-  >
-    <div class="card" cdkDrag *ngFor="let item of results">
+<div class="cards-container" cdkDropListGroup [ngClass]="{ 'dark-theme': isDark }">
+  <div class="container" cdkDropList [cdkDropListData]="newcharacterList$.results"
+    (cdkDropListDropped)="dropHandler($event)" [ngClass]="{ ar__text: rightDirection }">
+    <div class="card" cdkDrag *ngFor="let item of newcharacterList$.results">
       <div class="card-body">
-        <img
-          *ngIf="item.gender == 'male'"
-          class="profile-icon"
-          src="../../../assets/man.png"
-          alt="Profile-icon"
-        />
-        <img
-          *ngIf="item.gender == 'female'"
-          class="profile-icon"
-          src="../../../assets/woman.png"
-          alt="Profile-icon"
-        />
-        <img
-          *ngIf="item.gender == 'n/a'"
-          class="profile-icon"
-          src="../../../assets/ambiguous.png"
-          alt="Profile-icon"
-        />
+        <img *ngIf="item.gender == 'male'" class="profile-icon" src="../../../assets/man.png" alt="Profile-icon" />
+        <img *ngIf="item.gender == 'female'" class="profile-icon" src="../../../assets/woman.png" alt="Profile-icon" />
+        <img *ngIf="item.gender == 'n/a'" class="profile-icon" src="../../../assets/ambiguous.png" alt="Profile-icon" />
         <h5 class="card-title">{{ item.name }}</h5>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" [ngClass]="{ ar__text: rightDirection }">
-          <img
-            *ngIf="item.gender == 'male'"
-            [src]="maleGender"
-            alt="Gender-icon"
-          />
-          <img
-            *ngIf="item.gender == 'female'"
-            [src]="femaleGender"
-            alt="Gender-icon"
-          />
+          <img *ngIf="item.gender == 'male'" [src]="maleGender" alt="Gender-icon" />
+          <img *ngIf="item.gender == 'female'" [src]="femaleGender" alt="Gender-icon" />
           <span [ngClass]="{ ar__text: rightDirection }">{{
             item.gender | translate
-          }}</span>
+            }}</span>
         </li>
         <li class="list-group-item" [ngClass]="{ ar__text: rightDirection }">
-          {{ "Height" | translate }}: {{ item.height }}{{ "cm" | translate }}
+          {{ "height" | translate }}: {{ item.height }}{{ "cm" | translate }}
         </li>
         <li class="list-group-item" [ngClass]="{ ar__text: rightDirection }">
-          {{ "created date" | translate }}: {{ item.created | date }}
+          {{ "createdDate" | translate }}: {{ item.created | date }}
         </li>
       </ul>
     </div>
   </div>
-  <div
-    class="search__failure"
-    [ngClass]="{ ar__text: rightDirection }"
-    *ngIf="length == 0"
-  >
+  <div class="search__failure" [ngClass]="{ ar__text: rightDirection }" *ngIf="length == 0">
     <img src="../../../assets/No-Data.png" alt="No-Data-icon" />
     <div class="content">
       <h1 [ngClass]="{ 'dark-theme': isDark }">
-        {{ "No Data Found" | translate }}
+        {{ "noDataFound" | translate }}
       </h1>
       <h3 [ngClass]="{ 'dark-theme': isDark }">
-        {{ "Please try again" | translate }}
+        {{ "pleaseTryAgain" | translate }}
       </h3>
     </div>
   </div>
 
-  <app-pagenation
-    *ngIf="count > 10"
-    [finalPage]="finalPage"
-    [nextPage]="nextPage"
-    [previousPage]="previousPage"
-    (results)="newPage($event)"
-  ></app-pagenation>
+  <app-pagenation *ngIf="newcharacterList$.count > 10" [finalPage]="finalPage"></app-pagenation>
 </div>

@@ -1,6 +1,6 @@
 <div class="header" [ngClass]="{ 'bg-primary': !isDark, 'dark-theme': isDark }">
   <nav>
-    <span class="title">SW App</span>
+    <span class="title" (click)="allCharacterList()">SW App</span>
   </nav>
   <div class="container">
     <form class="form" [formGroup]="searchForm">

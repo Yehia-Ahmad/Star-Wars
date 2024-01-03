@@ -1,9 +1,9 @@
 {
-  "Height": "الطول",
+  "height": "الطول",
   "cm": "سم",
-  "created date": "تاريخ الإنشاء",
+  "createdDate": "تاريخ الإنشاء",
   "male": "ذكر",
   "female": "انثى",
-  "No Data Found": "لم يت العثور على البيانات",
-  "Please try again": "من فضلك حاول مره اخرى"
+  "noDataFound": "لم يت العثور على البيانات",
+  "pleaseTryAgain": "من فضلك حاول مره اخرى"
 }

@@ -1,11 +1,7 @@
-<div
-  class="pagenation"
-  [ngClass]="{ 'dark-theme': isDark }"
-  aria-label="Page navigation example"
->
+<div class="pagenation" [ngClass]="{ 'dark-theme': isDark }" aria-label="Page navigation example">
   <ul class="pagination-list">
-    <li class="page-item" [ngClass]="{ disabled: firstPage }">
-      <button class="btn" (click)="getPreviousPage()">
+    <li class="page-item">
+      <button class="btn" (click)="getPreviousPage()" [disabled]="firstPage">
         <img src="../../../assets/left-arrow.svg" alt="left-arrow-icon" />
       </button>
     </li>
@@ -16,8 +12,8 @@
         {{ finalPage }}
       </button>
     </li>
-    <li class="page-item" [ngClass]="{ disabled: lastPage }">
-      <button class="btn" (click)="getNextPage()">
+    <li class="page-item">
+      <button class="btn" (click)="getNextPage()" [disabled]="lastPage">
         <img src="../../../assets/right-arrow.svg" alt="right-arrow-icon" />
       </button>
     </li>

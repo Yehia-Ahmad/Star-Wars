@@ -1,9 +1,9 @@
 {
-  "Height": "Height",
+  "height": "Height",
   "cm": "cm",
-  "created date": "created date",
+  "createdDate": "created date",
   "male": "male",
   "female": "female",
-  "No Data Found": "No Data Found",
-  "Please try again": "Please try again"
+  "noDataFound": "No Data Found",
+  "pleaseTryAgain": "Please try again"
 }

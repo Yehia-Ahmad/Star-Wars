@@ -1,5 +1,6 @@
+import { CharacterListService } from 'src/app/Services/character-list.service';
 import { Observable } from 'rxjs';
-import { APIResponse } from '../Models';
+import { APIResponse } from '../models';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
@@ -8,17 +9,28 @@ import { environment as env } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class APIService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private characterList: CharacterListService
+  ) {}
 
-  getCharacterList(): Observable<APIResponse> {
+  getCharacterList(pageNum?: string, url?: string): Observable<APIResponse> {
+    if (pageNum) {
+      const params = new HttpParams().set('page', pageNum);
+      if (url) {
+        if (url.includes('search')) {
+          let term = this.characterList.searchTerm.value;
+          return this.http.get<APIResponse>(
+            `${env.BASE_URL}people/?search=${term}&page=${pageNum}`
+          );
+        } else {
+          return this.http.get<APIResponse>(`${env.BASE_URL}people`, {
+            params: params,
+          });
+        }
+      }
+    }
     return this.http.get<APIResponse>(`${env.BASE_URL}people`);
-  }
-
-  getNewPage(pageNum: string): Observable<APIResponse> {
-    const params = new HttpParams().set('page', pageNum);
-    return this.http.get<APIResponse>(`${env.BASE_URL}people`, {
-      params: params,
-    });
   }
 
   searchCharacter(term: string): Observable<APIResponse> {

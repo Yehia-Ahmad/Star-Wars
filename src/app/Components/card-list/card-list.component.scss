@@ -1,19 +1,20 @@
 @mixin card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow-x: hidden;
+  background-color: transparent;
+  cursor: grab;
   width: 18rem;
   margin: 10px;
   height: 250px;
   box-shadow: 4px 3px 8px 0px rgb(200 152 44 / 22%);
-  cursor: pointer;
-  overflow-x: hidden;
   &:hover {
     box-shadow: 4px 3px 11px 6px rgb(200 152 44 / 46%);
     transform: translateY(-3px);
     transition-duration: 0.5s;
   }
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
   & > .card-body {
     display: flex;
     align-items: center;
@@ -80,7 +81,8 @@
 
 .cdk-drag-preview {
   @include card();
-  background-color: #fff;
+  background-color: transparent;
+  cursor: grabbing;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
     0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);

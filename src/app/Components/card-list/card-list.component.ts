@@ -8,7 +8,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { APIService } from 'src/app/Services/api.service';
+import { CharacterListService } from 'src/app/Services/character-list.service';
 import { LanguageService } from 'src/app/Services/language.service';
+import { APIResponse } from 'src/app/models';
 
 @Component({
   selector: 'app-card-list',
@@ -21,19 +24,35 @@ export class CardListComponent implements OnInit, OnChanges {
   femaleGender: string = '../../../assets/Gender-Female.svg';
   finalPage: number;
   length: number = 1;
+  next: string | null;
+  previous: string | null;
+  newcharacterList$: APIResponse;
   @Input() rightDirection: boolean;
-  @Input() count: number;
-  @Input() nextPage: string;
-  @Input() previousPage: string;
-  @Input() results: Array<any>;
 
   constructor(
+    private api: APIService,
+    private characterList: CharacterListService,
     private theme: ThemeService,
     private language: LanguageService,
     private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
+    this.getCharacterList();
+    this.characterList.newList.subscribe((res: any) => {
+      this.newcharacterList$ = res;
+      this.next = this.newcharacterList$.next;
+      this.previous = this.newcharacterList$.previous;
+      if (this.newcharacterList$.count > 10) {
+        let reminder = this.newcharacterList$.count % 10;
+        let temp = Math.floor(this.newcharacterList$.count / 10);
+        if (reminder > 0) {
+          this.finalPage = temp + 1;
+        }
+      } else {
+        this.finalPage = 0;
+      }
+    });
     this.theme.isDark.next(Boolean(this.theme.getItem('isDark')));
     this.theme.isDark.subscribe((res: boolean) => {
       this.isDark = res;
@@ -48,15 +67,12 @@ export class CardListComponent implements OnInit, OnChanges {
         this.translate.use(res);
       });
     }
-    if (this.count > 10) {
-      let reminder = this.count % 10;
-      let temp = Math.floor(this.count / 10);
-      if (reminder > 0) {
-        this.finalPage = temp + 1;
-      }
-    } else {
-      this.finalPage = 0;
-    }
+  }
+
+  getCharacterList() {
+    return this.api.getCharacterList().subscribe((res: any) => {
+      this.characterList.newList.next(res);
+    });
   }
 
   themeChanger() {
@@ -78,9 +94,5 @@ export class CardListComponent implements OnInit, OnChanges {
       event.previousIndex,
       event.currentIndex
     );
-  }
-
-  newPage(event: any) {
-    this.results = event;
   }
 }
