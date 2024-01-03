@@ -31,7 +31,6 @@
 }
 
 .cards-container {
-  min-height: calc(100vh - 60px);
   margin: 0;
   padding-bottom: 5rem;
   display: flex;
@@ -40,6 +39,7 @@
   justify-content: center;
   overflow-x: hidden;
   & > .container {
+    height: 79vh;
     margin-top: 5rem;
     overflow-x: hidden;
     display: grid;

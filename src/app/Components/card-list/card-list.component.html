@@ -25,7 +25,7 @@
       </ul>
     </div>
   </div>
-  <div class="search__failure" [ngClass]="{ ar__text: rightDirection }" *ngIf="length == 0">
+  <div class="search__failure" [ngClass]="{ ar__text: rightDirection }" *ngIf="searchFailure">
     <img src="../../../assets/No-Data.png" alt="No-Data-icon" />
     <div class="content">
       <h1 [ngClass]="{ 'dark-theme': isDark }">

@@ -23,9 +23,9 @@ export class CardListComponent implements OnInit, OnChanges {
   maleGender: string = '../../../assets/Gender-Male.svg';
   femaleGender: string = '../../../assets/Gender-Female.svg';
   finalPage: number;
-  length: number = 1;
   next: string | null;
   previous: string | null;
+  searchFailure: boolean = false;
   newcharacterList$: APIResponse;
   @Input() rightDirection: boolean;
 
@@ -62,7 +62,6 @@ export class CardListComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['results']) {
-      this.length = changes['results'].currentValue.length;
       this.language.lang.subscribe((res: string) => {
         this.translate.use(res);
       });
